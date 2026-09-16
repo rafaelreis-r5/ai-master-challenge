@@ -7,7 +7,7 @@
 - [x] `.venv/bin/python tests/test_data_pipeline.py` — fontes, privacidade, SQLite, modelo, splits, embeddings, FAISS, geometria e vizinhos.
 - [x] `.venv/bin/python tests/test_backend.py` — validação, idempotência concorrente, CORS permitido, replay, Graph, feedback, isolamento e proveniência de sessão.
 - [x] `SUPPORT_BASE_URL=http://127.0.0.1:8000 .venv/bin/python tests/test_integration.py` — API real, replay, alerta→Graph, Copilot e hashes da baseline versionada dos 13 originais.
-- [x] `npm --prefix frontend test` e `npm --prefix frontend run build` — ROI, tipos e build Vite.
+- [x] `pnpm --dir frontend test` e `pnpm --dir frontend run build` — ROI, tipos e build Vite.
 - [x] Navegador: Ticket Lab executou inferência online e abriu o mesmo ticket no Graph, com oito conexões e tabela alternativa.
 - [x] Navegador: build com `VITE_API_BASE_URL=http://127.0.0.1:8001` carregou Diagnosis por API externa CORS-autorizada.
 - [x] Navegador: após reinício do backend, Diagnosis DS1 e Command Center DS2 carregaram métricas reais, indisponibilidade temporal e limiar de revisão de 75%.

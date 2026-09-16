@@ -10,7 +10,7 @@ Um sistema local de Inteligência de Suporte com seis lentes: diagnóstico, estr
 
 ## Executar localmente
 
-Pré-requisitos: Python 3.12 e Node.js compatível com o Vite. Executar a partir deste diretório. O ambiente desta entrega já está preparado em `.venv`; `artifacts/v1/catalog.sqlite3` é a fonte sanitizada dos tickets e os demais artefatos são índices/modelos derivados.
+Pré-requisitos: Python 3.12, Node.js compatível com o Vite e pnpm 10. Executar a partir deste diretório. O ambiente desta entrega já está preparado em `.venv`; `artifacts/v1/catalog.sqlite3` é a fonte sanitizada dos tickets e os demais artefatos são índices/modelos derivados.
 
 ```sh
 .venv/bin/python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
@@ -26,8 +26,8 @@ python3.12 -m venv .venv
 .venv/bin/python scripts/prepare_data.py
 .venv/bin/python scripts/train.py
 .venv/bin/python scripts/build_semantic.py
-npm --prefix frontend ci
-npm --prefix frontend run build
+pnpm --dir frontend install --frozen-lockfile
+pnpm --dir frontend run build
 .venv/bin/python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
@@ -38,8 +38,8 @@ A primeira preparação semântica baixa um encoder público; consultas posterio
 ```sh
 .venv/bin/python tests/test_data_pipeline.py
 .venv/bin/python tests/test_backend.py
-npm --prefix frontend test
-npm --prefix frontend run build
+pnpm --dir frontend test
+pnpm --dir frontend run build
 ```
 
 Com o servidor local ativo:

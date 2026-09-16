@@ -46,11 +46,13 @@ Caso o cache Hugging Face não fique em `HF_HOME`, informe `SUPPORT_ENCODER_PATH
 
 Depois de publicar o backend em um host com volume persistente e configurar a origem dele em `SUPPORT_ALLOWED_ORIGINS`, faça o deploy do frontend:
 
+No projeto Vercel, use `challenges/process-002-support/frontend` como Root Directory, `pnpm install --frozen-lockfile` como Install Command, `pnpm run build` como Build Command e `dist` como Output Directory.
+
 ```sh
 cd frontend
-npx vercel link
-npx vercel env add VITE_API_BASE_URL production
-npx vercel --prod
+pnpm dlx vercel link
+pnpm dlx vercel env add VITE_API_BASE_URL production
+pnpm dlx vercel --prod
 ```
 
 No segundo comando, informe `https://SEU-BACKEND.exemplo.com`. A variável precisa existir antes do build remoto porque o Vite a incorpora na compilação. Antes de expor o endpoint publicamente, conclua OPS-05 ou mantenha o backend protegido pela camada de acesso do provedor.

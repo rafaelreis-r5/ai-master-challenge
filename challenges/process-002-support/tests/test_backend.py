@@ -39,6 +39,11 @@ def main():
         diagnosis = client.get('/api/diagnosis').json()
         assert diagnosis['total'] == 8469 and diagnosis['csat']['count'] == 2769
         assert sum(diagnosis['csat']['distribution'].values()) == 2769
+        with_csat = client.get('/api/diagnosis?csat_presence=present').json()
+        without_csat = client.get('/api/diagnosis?csat_presence=missing').json()
+        score_five = client.get('/api/diagnosis?csat_score=5').json()
+        assert with_csat['total'] == 2769 and without_csat['total'] == 5700
+        assert score_five['total'] == score_five['csat']['count'] == 544
         assert diagnosis['temporal']['ttr_available'] is False
         assert len(diagnosis['crossings']) == 6
         for groups in diagnosis['crossings'].values():

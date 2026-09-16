@@ -214,17 +214,22 @@ def create_app(artifacts=ARTIFACTS, database=None, start_worker=True, allowed_or
     @app.get('/api/diagnosis')
     def diagnosis(dimension: str = 'channel', secondary: str | None = None, group_by: str | None = None,
                   channel: str | None = None, priority: str | None = None, category: str | None = None,
-                  status: str | None = None, product: str | None = None, q: str = Query('', max_length=200)):
+                  status: str | None = None, product: str | None = None,
+                  csat_presence: Literal['present', 'missing'] | None = None,
+                  csat_score: int | None = Query(None, ge=1, le=5), q: str = Query('', max_length=200)):
         dimensions = group_by.split(',') if group_by else None
         if dimension not in DIMENSIONS or (secondary and secondary not in DIMENSIONS) or (
                 dimensions and (len(dimensions) > 3 or any(d not in DIMENSIONS for d in dimensions))):
             raise ValueError('Dimensão de análise inválida.')
         return pipeline.diagnosis(dimension, secondary, dimensions, channel=channel, priority=priority,
-                                  category=category, status=status, product=product, q=q)
+                                  category=category, status=status, product=product,
+                                  csat_presence=csat_presence, csat_score=csat_score, q=q)
 
     @app.get('/api/tickets')
     def tickets(dataset_id: Dataset = 'ds1', channel: str | None = None, priority: str | None = None,
                 category: str | None = None, status: str | None = None, product: str | None = None,
+                csat_presence: Literal['present', 'missing'] | None = None,
+                csat_score: int | None = Query(None, ge=1, le=5),
                 q: str = Query('', max_length=200), cluster_id: str | None = None, space_id: str | None = None,
                 session_id: str | None = None, low_confidence: bool = False,
                 limit: int = Query(25, ge=1, le=100), offset: int = Query(0, ge=0)):
@@ -247,7 +252,8 @@ def create_app(artifacts=ARTIFACTS, database=None, start_worker=True, allowed_or
                 rows = [r for r in rows if r.get('confidence') is not None and r['confidence'] < r.get('review_threshold', .75)]
         else:
             rows = pipeline.list_tickets(dataset_id, q, cluster_id, space_id, channel=channel, priority=priority,
-                                         category=category, status=status, product=product)
+                                         category=category, status=status, product=product,
+                                         csat_presence=csat_presence, csat_score=csat_score)
         return {'items': rows[offset:offset + limit], 'total': len(rows), 'limit': limit, 'offset': offset}
 
     @app.get('/api/tickets/{ticket_id}')

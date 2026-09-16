@@ -7,7 +7,7 @@ Vite + TypeScript vanilla; FastAPI e SQLite compartilhados. Definição do plano
 ## Users
 Gestores de CX, agentes de suporte e avaliadores do challenge. Diagnosticar demanda, testar automação, investigar relações e revisar sugestões.
 ## Product Purpose
-Um sistema observado por seis lentes que compartilham IDs, dados, versões, sessão e evidência.
+Um sistema observado por seis lentes, com a rota O Início como guia, que compartilham IDs, dados, versões, sessão e evidência.
 ## Capabilities and Constraints
 CSV original imutável. Histórico, simulação, entrada manual e avaliação permanecem identificados. TTR indisponível sem data de abertura. Não enviar respostas externas. Sem valores fictícios apresentados como métricas.
 ## Brand Commitments

@@ -103,6 +103,7 @@ Gráficos têm tabela equivalente; indicadores e seleção não dependem só de 
 - [ ] DIA-03: qualquer indicador possui fórmula, unidade, origem e estado de disponibilidade consultáveis.
 - [x] DIA-04: FRT/TTR/SLA/esforço não viram zero, horas artificiais ou rankings de canal; motivo aparece sem hover.
 - [x] DIA-05: CSAT só inclui notas válidas e informa que a fonte atual contém notas apenas nos fechados.
+- [x] DIA-05b: filtros de presença e nota CSAT aplicam o mesmo recorte à API, métricas e evidências.
 - [x] DIA-06: lista e gráfico apresentam os mesmos agregados; paginação da lista não altera métricas.
 - [x] DIA-06b: os seis cruzamentos solicitados, inclusive canal × prioridade × tipo, usam o mesmo contrato; média e mediana não substituem a distribuição.
 - [ ] DIA-07: estado vazio, sem notas, parcial, API indisponível e versão ausente têm tratamento verificável.

@@ -2,7 +2,7 @@
 
 ## 1. Produto e limites
 
-Uma única aplicação reúne análise histórica, inferência, assistência e observabilidade. As seis rotas são consumidores de um núcleo comum. A pergunta muda; identidade, proveniência, decisões e evidências permanecem consistentes. [Dados e métricas](03-dados-e-metricas.md) é o contrato de significado; [design](04-design-e-experiencia.md) é o contrato visual.
+Uma única aplicação reúne análise histórica, inferência, assistência e observabilidade. O Início e as seis lentes são consumidores de um núcleo comum. A pergunta muda; identidade, proveniência, decisões e evidências permanecem consistentes. [Dados e métricas](03-dados-e-metricas.md) é o contrato de significado; [design](04-design-e-experiencia.md) é o contrato visual.
 
 O repositório contém briefing, CSVs e identidade G4, agora consumidos por uma aplicação local única. O README original estima volumes diferentes dos arquivos locais. Esta implementação usa as contagens verificadas. Não afirmar autenticidade de produção: DS1 contém placeholders e resoluções genéricas.
 

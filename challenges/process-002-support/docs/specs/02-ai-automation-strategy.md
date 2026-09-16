@@ -122,7 +122,7 @@ Fluxo visual tem equivalente textual. Oportunidades e ações são alcançáveis
 ## 9. Checkpoints e aceite
 
 - [ ] AUT-01: carteira usa evidências locais, contagens consultadas e IDs recuperáveis, com DS1/DS2 separados.
-- [x] AUT-02: cada oportunidade diferencia observação, hipótese, política e resultado avaliado.
+- [ ] AUT-02: cada oportunidade diferencia observação, hipótese, política e resultado avaliado.
 - [x] AUT-03: limites humanos da seção 4 aparecem antes da ação de testar; baixa evidência permite abstenção.
 - [ ] AUT-04: links para Lab/Copilot/Graph/Command Center preservam contexto e usam o pipeline compartilhado.
 - [x] AUT-05: benchmark mostra números calculados e versão; antes de existir relatório, aparece como não avaliado.

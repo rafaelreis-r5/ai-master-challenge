@@ -1,9 +1,9 @@
 # Support Intelligence
 
-Um sistema local de Inteligência de Suporte com seis lentes: diagnóstico, estratégia de automação, laboratório de tickets, Copilot, rede semântica e centro de comando. A documentação foi concluída antes do início da implementação, conforme solicitado.
+Um sistema local de Inteligência de Suporte com seis lentes: diagnóstico, estratégia de automação, laboratório de tickets, Copilot, rede semântica e centro de comando. A rota **O Início** orienta a demonstração para pessoas não técnicas. A documentação-base foi concluída antes do início da implementação, conforme solicitado.
 
-- [Documentação e seis specs](docs/00-indice.md).
-- [Plano — 10 sprints, 40 fases e checkpoints](docs/02-plano-de-implementacao.md).
+- [Documentação, spec de onboarding e seis specs das lentes](docs/00-indice.md).
+- [Plano — 10 sprints, 40 fases + onboarding e checkpoints](docs/02-plano-de-implementacao.md).
 - [Dados e limitações](docs/03-dados-e-metricas.md).
 - [Validação e roteiro executivo](docs/05-validacao-demo-processo.md).
 - [Resultados técnicos medidos](docs/06-resultados-tecnicos.md).

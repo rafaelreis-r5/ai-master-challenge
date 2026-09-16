@@ -1,6 +1,6 @@
 # Design e experiência compartilhada
 
-Status: especificação de implementação. Este documento define a experiência única das seis lentes; não comprova funcionalidades já implementadas.
+Status: especificação de implementação. Este documento define a experiência única das seis lentes e a rota de onboarding; os checkboxes de aceite continuam sendo a fonte da evidência.
 
 ## 1. Fontes e decisões
 
@@ -59,7 +59,7 @@ Preservar proporção e arquivos originais. Se a marca tiver texto adjacente red
 
 ## 3. Shell único
 
-A estrutura persistente contém marca, nome Support Intelligence, navegação com as seis lentes, contexto dos dados, status da sessão e área principal. A lente ativa deve ser indicada por texto/semântica e acento visual. Cada lente mantém uma URL própria dentro do mesmo aplicativo.
+A estrutura persistente contém marca, nome Support Intelligence, navegação com **O Início** e as seis lentes, contexto dos dados, status da sessão e área principal. A lente ativa deve ser indicada por texto/semântica e acento visual. Cada lente mantém uma URL própria dentro do mesmo aplicativo.
 
 | Lente | Pergunta que orienta a tela | Ação principal |
 |---|---|---|
@@ -128,7 +128,7 @@ Progressão: visão de clusters → subgrupo quando existir no artefato → tick
 
 O modo “Tabela / Lista” deve permitir as mesmas investigações essenciais sem canvas: cluster, tamanho, categoria dominante, métricas disponíveis, revisão necessária e ação para abrir tickets. No detalhe de ticket: vizinho, similaridade, rótulo observado, predição e origem. Busca, filtros, seleção e links funcionam por teclado nessa alternativa.
 
-Movimento de entrada usa coordenadas/vizinhos calculados; não altera relações para ficar visualmente atraente. Em `prefers-reduced-motion: reduce`, inserir diretamente na posição final, focar apenas por ação explícita e atualizar rótulos. Pausar animação não pausa o processamento, salvo controle de replay separado.
+Movimento de entrada usa coordenadas/vizinhos calculados; não altera relações para ficar visualmente atraente. O Graph usa Sigma/Graphology para os dados e uma camada SVG discreta de traços animados nas arestas reais; o pulso é somente uma affordance visual de atividade, nunca uma narrativa de aprendizado. Em `prefers-reduced-motion: reduce`, inserir diretamente na posição final, desativar o pulso e atualizar rótulos. Pausar animação não pausa o processamento, salvo controle de replay separado.
 
 Alertas dependem de regras documentadas e mostram grupo, quantidade, janela simulada, critério e registros. “Possível incidente” não vira incidente confirmado por receber brilho. Nenhuma informação existe exclusivamente em cor, tamanho, movimento, tooltip ou posição.
 
@@ -196,3 +196,4 @@ Registrar no process log decisões, limitações dos dados, erros encontrados, c
 - [ ] DES-10: layout utilizável a 320 CSS px e zoom 200%, com foco sempre visível.
 - [ ] DES-11: roteiro completo de 12 passos é repetível e seu fallback funciona sem LLM.
 - [ ] DES-12: process log registra execução real; números de exemplo do briefing não aparecem como medidos.
+- [x] DES-13: O Início explica corpus, estados, limites e roteiro; o Graph tem pulso neon baseado nas arestas reais e mantém tabela equivalente.

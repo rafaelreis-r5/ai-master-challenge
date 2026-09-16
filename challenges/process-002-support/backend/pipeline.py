@@ -133,6 +133,13 @@ class Pipeline:
         for field in ('channel', 'priority', 'category', 'status', 'product'):
             if filters.get(field):
                 rows = [r for r in rows if r.get(field) == filters[field]]
+        if filters.get('csat_presence') == 'present':
+            rows = [r for r in rows if r.get('csat') is not None]
+        elif filters.get('csat_presence') == 'missing':
+            rows = [r for r in rows if r.get('csat') is None]
+        if filters.get('csat_score') is not None:
+            score = float(filters['csat_score'])
+            rows = [r for r in rows if r.get('csat') is not None and float(r['csat']) == score]
         if q:
             query = q.casefold()
             rows = [r for r in rows if query in (r.get('text', '') + ' ' + r['ticket_id']).casefold()]
@@ -419,9 +426,33 @@ class Pipeline:
                 group['session_count'] = len(members)
                 group['session_sources'] = dict(Counter(r['source'] for r in members))
                 group['historical_count'] = group['count']
+            # Relações entre grupos usam os centroides dos embeddings reais;
+            # a linha é uma pista agregada e mantém o score original explícito.
+            overview_edges = []
+            clustered = [(group, int(group.get('cluster_id', '').rsplit(':', 1)[-1])) for group in summaries
+                         if int(group.get('cluster_id', '').rsplit(':', 1)[-1]) >= 0]
+            centroids = {}
+            for group, label in clustered:
+                members = [i for i, value in enumerate(space['labels']) if int(value) == label]
+                vector = np.asarray(space['vectors'][members], dtype='float32').mean(axis=0)
+                norm = float(np.linalg.norm(vector))
+                if norm:
+                    centroids[group['cluster_id']] = vector / norm
+            for source, source_vector in centroids.items():
+                candidates = []
+                for target, target_vector in centroids.items():
+                    if source >= target:
+                        continue
+                    score = float(np.dot(source_vector, target_vector))
+                    if score >= .40:
+                        candidates.append((score, target))
+                for score, target in sorted(candidates, reverse=True)[:4]:
+                    overview_edges.append({'id': f'{source}|{target}', 'source': source, 'target': target,
+                                           'weight': score, 'type': 'aggregate',
+                                           'method': 'centroid_cosine'})
             nodes = summaries[:100]
             return {'space_id': space_id, 'dataset_id': space['dataset_id'], 'level': 'overview',
-                    'nodes': nodes, 'edges': [], 'clusters': summaries[:100], 'total': len(summaries),
+                    'nodes': nodes, 'edges': overview_edges[:400], 'clusters': summaries[:100], 'total': len(summaries),
                     'displayed': len(nodes), 'truncated': len(summaries) > 100,
                     'ticket_count': len(space['ids']), 'session_ticket_count': len(overlay),
                     'noise_count': sum(int(x) < 0 for x in space['labels'])}

@@ -5,7 +5,7 @@ Status: núcleo demonstrável implementado e validado localmente; checkpoints P0
 ## Ordem de leitura
 
 1. [Arquitetura e contratos compartilhados](01-arquitetura-compartilhada.md).
-2. [Plano de implementação — sprints e fases F00–F39](02-plano-de-implementacao.md).
+2. [Plano de implementação — sprints e fases F00–F40](02-plano-de-implementacao.md).
 3. [Dados, limitações e métricas](03-dados-e-metricas.md).
 4. [Design G4 e experiência integrada](04-design-e-experiencia.md).
 5. [Validação, demo e process log](05-validacao-demo-processo.md).
@@ -13,8 +13,15 @@ Status: núcleo demonstrável implementado e validado localmente; checkpoints P0
 7. [Operação e deploy](07-operacao-e-deploy.md).
 8. [Auditoria final de implementação](08-auditoria-final.md).
 
+Índice do [process log](../process-log/README.md), exigido pelo guia de submissão.
+
+## Porta de entrada
+
+[O Início](../frontend/src/views/start.ts) é uma rota de onboarding, não uma sétima lente. Ela explica os dois corpora, o significado dos estados e o roteiro recomendado para percorrer as seis lentes sem misturar histórico, simulação e hipótese.
+
 | Lente | Pergunta | Spec |
 |---|---|---|
+| O Início | Como percorrer o sistema e explicar seus limites? | [00](specs/00-o-inicio.md) |
 | Operational Diagnosis | Onde estamos perdendo tempo e o que os dados permitem concluir? | [01](specs/01-operational-diagnosis.md) |
 | AI Automation Strategy | O que automatizar e quando exigir um humano? | [02](specs/02-ai-automation-strategy.md) |
 | AI Ticket Lab | O modelo entende um novo ticket? | [03](specs/03-ai-ticket-lab.md) |

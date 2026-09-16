@@ -31,7 +31,7 @@ Um comportamento só está concluído quando existe, foi exercitado e sua evidê
 - [x] SEMANTIC — produto escalar confere com scores; versões de encoder/índice/projeção compatíveis; DS1/DS2 isolados.
 - [ ] SESSION — idempotência, eventos ordenados, restart, duas abas, reset preservando histórico e erros persistidos.
 - [ ] COPILOT — nenhuma resolução inventada, fontes citadas, rejeição/edição persistidas, ausência de evidência explícita.
-- [ ] NAVIGATION — todas as seis rotas, foco, filtros, back/reload e links incompatíveis.
+- [ ] NAVIGATION — O Início e as seis lentes, foco, filtros, back/reload e links incompatíveis.
 - [ ] ACCESSIBILITY — teclado, nomes acessíveis, contraste, tabela equivalente e reduced motion.
 - [ ] FALLBACK — interromper polling e LLM opcional sem indisponibilizar páginas independentes.
 - [x] BUILD — build e checagem de tipos do frontend; imports/compilação e checks do backend.
@@ -80,9 +80,11 @@ O guia do challenge exige evidências de uso de IA. Este registro descreve somen
 | Escolhas técnicas | Consulta à documentação oficial registrada em [arquitetura](01-arquitetura-compartilhada.md) | Aplicação local única, polling antes de streaming, grafo e ML reais |
 | Ambiente de implementação | Ambiente isolado Python 3.12 criado no challenge; dependências congeladas em `requirements.lock.txt`; imports FastAPI/scikit-learn/FAISS/Sentence-Transformers/HDBSCAN/UMAP passaram | Originais preservados; aceleração MPS disponível; nenhuma publicação ou push |
 | Direção do usuário | Usuário confirmou “Iniciar a implementação após documentar” | Implementação autorizada após concluir e revisar este conjunto |
-| Implementação | Backend FastAPI, SQLite de catálogo/sessões, ML, semântica, seis lentes e frontend Vite construídos dentro do challenge | Dados históricos, simulação e entrada manual mantêm origem separada; nenhum CSV foi alterado |
+| Implementação | Backend FastAPI, SQLite de catálogo/sessões, ML, semântica, seis lentes, O Início e frontend Vite construídos dentro do challenge | Dados históricos, simulação e entrada manual mantêm origem separada; nenhum CSV foi alterado |
 | Portabilidade | Catálogo/previsões migrados para SQLite; encoder deixou de depender de caminho absoluto macOS; frontend aceita API externa por variável de build | Artefatos continuam imutáveis e a publicação usa backend com volume persistente |
 | Validação final | Checks de dados, backend, integração, ROI, build e navegador executados em 2026-09-16 | Resultados e lacunas registradas em [resultados técnicos](06-resultados-tecnicos.md) e [auditoria final](08-auditoria-final.md) |
+| Onboarding e rede visual | Rota O Início carregada no navegador; Graph overview passou a exibir relações agregadas calculadas por centroides e pulso neon reduzível nas arestas | A camada visual não altera scores, IDs ou interpretação; validação dedicada em 320px/zoom/reduced-motion continua no gate de acessibilidade |
+| Persistência do Ticket Lab | Texto novo foi analisado, a URL recebeu `ticket_id`/sessão/versões e o recarregamento restaurou categoria, confiança e vizinhos | Validação de `model_version` antigo/incompatível e tempos por etapa continuam pendentes |
 
 Ao implementar, acrescentar execução, resultados de build/checks, métricas de avaliação, problemas encontrados, correções e limitações. Dados fictícios e números de layout do briefing não servem como evidência.
 

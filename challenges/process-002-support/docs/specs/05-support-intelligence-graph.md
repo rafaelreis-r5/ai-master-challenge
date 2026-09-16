@@ -1,7 +1,7 @@
 # Spec 05 — Support Intelligence Graph
 
-**Status:** núcleo semântico, Graph, deep links e alerta→ocorrências implementados; validação humana e fallback visual dedicado permanecem pendentes.  
-**Rota:** `/#/graph`.  
+**Status:** núcleo semântico, Graph, deep links, relações agregadas, alerta→ocorrências e camada visual neon implementados; validação humana e fallback visual dedicado permanecem pendentes.
+**Rota:** `/#/graph`.
 **Pergunta:** como os tickets se relacionam semanticamente, e o que essas relações revelam sobre classificação, incidentes e qualidade dos dados?
 
 O Graph representa embeddings, relações de vizinhança e agrupamentos mensurados. Não representa os neurônios do classificador e não deve ser chamado de “rede neural do modelo”. Compartilha tickets, sessões, versões, filtros e eventos com as demais abas.
@@ -117,6 +117,7 @@ Os checkpoints de fluxo integrado abaixo são P0, incluindo reação ao replay, 
 - [ ] Validar a qualidade dos vizinhos e agrupamentos com amostras e métricas apropriadas, documentando limitações.
 - [x] Expor recortes hierárquicos, métricas disponíveis e limites no backend.
 - [x] Implementar Sigma.js/Graphology, seleção, modos de cor, legenda, detalhe e tabela acessível.
+- [x] Adicionar pulso visual reduzível nas arestas reais e relações agregadas entre grupos por cosseno de centroides; scores e método permanecem consultáveis na tabela.
 - [ ] Entregar todos os modos P0 com origem e evidência; bloquear modos sem dados.
 - [x] Restaurar contexto por URL e abrir o ticket recém-analisado com scores reais.
 - [x] Consumir eventos de sessão de forma incremental, idempotente e recuperável.

@@ -1,6 +1,6 @@
 # Plano de implementação — sprints e checkpoints
 
-Este plano cobre as 40 fases solicitadas. Numeração preserva o briefing; dependências determinam a ordem real. F25 é desenhada em S0 e implementada em S4, antes dos consumidores de sessão. Estimativas de prazo só após benchmark do ambiente; o escopo de seis lentes excede o protótipo básico de 4–6 horas citado no challenge.
+Este plano cobre as 40 fases solicitadas e o incremento de onboarding F40. Numeração preserva o briefing; dependências determinam a ordem real. F25 é desenhada em S0 e implementada em S4, antes dos consumidores de sessão. Estimativas de prazo só após benchmark do ambiente; o escopo de seis lentes excede o protótipo básico de 4–6 horas citado no challenge.
 
 ## Como acompanhar
 
@@ -25,7 +25,7 @@ Este plano cobre as 40 fases solicitadas. Numeração preserva o briefing; depen
 | S6 | Command Center e Replay | F26–F29 | Contadores e grafo sincronizados por eventos reais da simulação. |
 | S7 | Incidentes e observabilidade | F30–F33 | Alertas navegáveis, auditoria e métricas de modelo. |
 | S8 | Verificação e desempenho | F34–F36 | Checks, limitações e execução documentados. |
-| S9 | Execução e demonstração | F37–F39 | Demo local ensaiada, aceite final e pendências explícitas. |
+| S9 | Execução e demonstração | F37–F40 | Demo local ensaiada, guia O Início e pendências explícitas. |
 
 ## Fases detalhadas
 
@@ -96,7 +96,7 @@ Este plano cobre as 40 fases solicitadas. Numeração preserva o briefing; depen
 - **Testes:** Validar quantis em amostra conhecida; zero respondentes gera null.
 - **Critérios de aceite:** Cobertura de respondentes sempre visível; nenhuma relação temporal inventada.
 - **Riscos:** Viés de seleção: apenas Closed tem CSAT; texto templateado.
-- [x] **F04.I — Implementação:** CSAT, cobertura, distribuição e estatísticas por recorte foram implementados.
+- [x] **F04.I — Implementação:** CSAT, cobertura, distribuição, estatísticas e filtros por presença/nota foram implementados.
 - [x] **F04.A — Checkpoint:** amostra vazia retorna nulo e a cobertura de CSAT foi verificada.
 
 ### F05 — Metodologia de ROI
@@ -588,6 +588,20 @@ Este plano cobre as 40 fases solicitadas. Numeração preserva o briefing; depen
 - **Riscos:** Confundir preparação com conclusão ou esconder bloqueios de dados.
 - [x] **F39.I — Implementação:** auditoria final, checklist e evidências executadas foram registrados.
 - [x] **F39.A — Checkpoint:** as seis specs foram relidas; hashes, testes, build e smoke test local confirmados; pendências mantidas abertas.
+
+### F40 — O Início e rede visual viva
+
+- **Objetivo:** dar a uma pessoa não técnica um caminho de entrada e tornar a rede semântica legível sem alterar seu significado.
+- **Entradas:** seis specs, catálogo compartilhado, coordenadas e arestas reais do Graph.
+- **Saídas:** rota `/#/inicio`, roteiro de oito passos, navegação contextual e camada neon reduzível nas arestas.
+- **Arquivos previstos:** `frontend/src/main.ts`, `frontend/src/ui.ts`, `frontend/src/views/start.ts`, `frontend/src/views/graph.ts`, `frontend/src/styles.css`, `backend/pipeline.py`.
+- **Dependências:** F22, F23, F31, F34.
+- **Abordagem:** reutilizar Sigma/Graphology; relações de overview usam cosseno de centroides e continuam marcadas como agregadas; animação é CSS/SVG sobre a geometria retornada, com tabela e aviso textual.
+- **Testes:** type-check, testes existentes, build Vite e smoke browser em O Início/Graph.
+- **Critérios de aceite:** pessoa consegue iniciar a demo sem contexto técnico; Graph overview tem conexões reais consultáveis; movimento reduzido desliga o pulso; nenhuma promessa de rede neural interna.
+- **Riscos:** brilho ser interpretado como evidência; mitigação por legenda, score/método na tabela e aviso persistente.
+- [x] **F40.I — Implementação:** O Início, navegação inicial, relações agregadas e pulso neon foram implementados.
+- [x] **F40.A — Checkpoint:** `pnpm run check`, `pnpm test`, `pnpm run build` e smoke browser das rotas passaram; QA dedicado de 320px/zoom/reduced-motion continua no gate G6.
 
 ## Gates transversais de implementação
 

@@ -41,9 +41,11 @@ Os 47.837 registros originais DS2 não possuem tempo, ID nativo, resolução ou 
 
 Todo card informa origem, janela, numerador/denominador quando for taxa, versão e atualização. Ausência de amostra é “sem dados”, nunca 0%.
 
+Uma decisão de triagem é elegível quando o resultado está `processing_status=complete`, foi produzido pela política (`decision_origin=policy_suggested`) e contém `suggested_route`. Resultados parciais ficam fora desse denominador e aparecem como ocorrências processadas, mas não como decisões automáticas.
+
 | Indicador | Regra |
 |---|---|
-| Roteamento automático | Decisões automáticas registradas ÷ decisões de triagem elegíveis. Indicar “roteamento na demonstração”; não afirmar envio a fila externa. |
+| Triagem sem revisão | Decisões de política sem revisão ÷ decisões de triagem elegíveis. A UI chama isso de “Triagem sem revisão”; indicar “na demonstração” e não afirmar envio a fila externa. |
 | Revisão humana | Decisões que exigem revisão ÷ decisões de triagem elegíveis. Pode sobrepor baixa confiança; não somar taxas como categorias exclusivas. |
 | Baixa confiança | Predições abaixo do limiar daquela versão ÷ predições válidas do mesmo modelo/domínio. |
 | Respostas sugeridas | Tickets com sugestão realmente gerada/recuperada ÷ tickets elegíveis para o Copilot; faltas e indisponibilidade têm motivos. |
@@ -116,7 +118,7 @@ Não introduzir WebSocket/SSE em P0. Reavaliar SSE somente se medições demonst
 | Baixo CSAT | DS1, N com nota, cobertura, regra e comparação; não gerar para DS2. |
 | Baixa confiança | Modelo, limiar, quantidade elegível e exemplos. |
 | Oportunidade de automação | Regra da Strategy, elegibilidade, exclusões e suposições de esforço. |
-| Possível incidente emergente | Concentração semântica por janela simulada, contagem, similaridade e grupo; nenhum claim de incidente real. |
+| Possível incidente emergente | Concentração semântica por janela simulada em **passos ordinais**, contagem, similaridade e grupo; nenhum claim de incidente real. |
 | TTR elevado | Indisponível nos dados atuais; futuro somente com duração válida. |
 
 Os thresholds são candidatos de demonstração até avaliação. Registrar política, tamanho mínimo, janela, cooldown e limites antes do cenário; não ajustar invisivelmente o critério para garantir o alerta. Cenários de concentração selecionam tickets reais semanticamente próximos, com seed e IDs auditáveis. Contar também `source_ticket_id` únicos: repetir a mesma fonte não pode inflar a evidência de incidência. Cenário misto de comparação ajuda verificar excesso de alertas, sem transformar essa comparação em prova estatística de produção.
@@ -147,7 +149,7 @@ Botões nativos rotulados, foco visível, status textual, tabelas para séries/d
 **P0-b — segunda etapa do núcleo integrado obrigatório**
 
 - [x] Integrar chegada/atualização do Graph e entrada manual opcional do Ticket Lab.
-- [x] Registrar feedback do Copilot e revisão humana com denominadores corretos.
+- [x] Registrar feedback do Copilot, triagem e revisão humana com denominadores elegíveis explícitos.
 - [x] Implementar cenário de concentração semântica com alertas e evidência reproduzível.
 - [x] Abrir alerta no cluster e destacar exatamente as ocorrências envolvidas.
 - [x] Implementar cenários de esforço/ROI com parâmetros visíveis e sem alegação de economia realizada.

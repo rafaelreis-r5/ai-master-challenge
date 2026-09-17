@@ -589,19 +589,19 @@ Este plano cobre as 40 fases solicitadas e o incremento de onboarding F40. Numer
 - [x] **F39.I — Implementação:** auditoria final, checklist e evidências executadas foram registrados.
 - [x] **F39.A — Checkpoint:** as seis specs foram relidas; hashes, testes, build e smoke test local confirmados; pendências mantidas abertas.
 
-### F40 — O Início e rede visual viva
+### F40 — O Início narrativo e rede visual viva
 
 - **Objetivo:** dar a uma pessoa não técnica um caminho de entrada e tornar a rede semântica legível sem alterar seu significado.
 - **Entradas:** seis specs, catálogo compartilhado, coordenadas e arestas reais do Graph.
-- **Saídas:** rota `/#/inicio`, roteiro de oito passos, navegação contextual e camada neon reduzível nas arestas.
+- **Saídas:** rota `/#/inicio` com narrativa em primeira pessoa, comando de execução local, roteiro de oito passos, navegação contextual e camada neon reduzível nas arestas.
 - **Arquivos previstos:** `frontend/src/main.ts`, `frontend/src/ui.ts`, `frontend/src/views/start.ts`, `frontend/src/views/graph.ts`, `frontend/src/styles.css`, `backend/pipeline.py`.
 - **Dependências:** F22, F23, F31, F34.
-- **Abordagem:** reutilizar Sigma/Graphology; relações de overview usam cosseno de centroides e continuam marcadas como agregadas; animação é CSS/SVG sobre a geometria retornada, com tabela e aviso textual.
+- **Abordagem:** reutilizar Sigma/Graphology; relações de overview usam cosseno de centroides e continuam marcadas como agregadas; animação é CSS/SVG sobre a geometria retornada, com nós pequenos e pulsantes, seleção que isola vizinhos, arraste individual, transição de entrada/saída, tabela e aviso textual.
 - **Testes:** type-check, testes existentes, build Vite e smoke browser em O Início/Graph.
-- **Critérios de aceite:** pessoa consegue iniciar a demo sem contexto técnico; Graph overview tem conexões reais consultáveis; movimento reduzido desliga o pulso; nenhuma promessa de rede neural interna.
+- **Critérios de aceite:** pessoa consegue entender a linha de raciocínio e iniciar a demo sem contexto técnico; não existe o antigo card de checklist; Graph overview tem conexões reais consultáveis, seleção tipo Obsidian, arraste individual e transição de workspace; movimento reduzido desliga o pulso; nenhuma promessa de rede neural interna.
 - **Riscos:** brilho ser interpretado como evidência; mitigação por legenda, score/método na tabela e aviso persistente.
-- [x] **F40.I — Implementação:** O Início, navegação inicial, relações agregadas e pulso neon foram implementados.
-- [x] **F40.A — Checkpoint:** `pnpm run check`, `pnpm test`, `pnpm run build` e smoke browser das rotas passaram; QA dedicado de 320px/zoom/reduced-motion continua no gate G6.
+- [x] **F40.I — Implementação:** O Início narrativo, comando local, remoção do checklist, navegação inicial, relações agregadas, nós neon, seleção, arraste e transição do workspace foram implementados.
+- [x] **F40.A — Checkpoint:** `pnpm run check`, `pnpm test` e `pnpm run build` passaram; a interação Graph foi revisada por agente; smoke browser e QA dedicado de 320px/zoom/reduced-motion continuam no gate G6.
 
 ## Gates transversais de implementação
 

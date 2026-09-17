@@ -17,7 +17,7 @@ Este arquivo é o índice das evidências de processo desta implementação. A n
 3. Especificar arquitetura, sprints, contratos e cada lente com checkboxes.
 4. Implementar o núcleo compartilhado e validar backend, frontend e integração.
 5. Exercitar as rotas no navegador e corrigir contexto, origem, acessibilidade textual e nomenclatura.
-6. Adicionar O Início e a camada neon do Graph sem alterar scores ou evidências.
+6. Adicionar O Início com a narrativa Hermes → Codex → planejamento e a camada neon interativa do Graph sem alterar scores ou evidências.
 7. Reler todas as specs, manter pendências abertas e executar a bateria final.
 
 ## Erros encontrados e correções
@@ -26,7 +26,10 @@ Este arquivo é o índice das evidências de processo desta implementação. A n
 - O overview do Graph não tinha relações agregadas; foram calculados centroides dos embeddings reais, com método e score expostos.
 - Filtros de CSAT previstos na spec não estavam na UI; foram adicionados com testes de presença e nota.
 - O resultado do Ticket Lab não persistia no endereço da página; o deep link agora inclui a identidade e restaura o resultado após recarga.
-- O replay chamava um contador de política de “triagem automática” e um ordinal de “segundos”; as legendas foram corrigidas para evitar interpretação operacional indevida.
+- O replay chamava um contador de política de “triagem automática” e tratava um ordinal como “segundos”; a API agora chama a janela de `window_steps` e as legendas evitam interpretação operacional indevida.
+- O primeiro rascunho do Graph só destacava arestas; a revisão acrescentou nós neon pequenos, seleção que isola a vizinhança, segundo clique/fundo para restaurar, arraste individual e transição do workspace.
+- O onboarding tinha um checklist visual que não produzia evidência; ele foi removido e substituído por uma narrativa em primeira pessoa e um card com o comando local reproduzível.
+- Smoke test final: O Início mostrou a narrativa e o comando; Graph mostrou 28 nós neon e o isolamento/restauração de uma seleção, sem warnings/erros do navegador.
 
 ## O que depende de validação humana
 

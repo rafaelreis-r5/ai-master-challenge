@@ -107,7 +107,7 @@ Implementação prevista em `frontend/src/views/lab.ts`, `backend/app.py`, `back
 **P0-b — integração do núcleo da demonstração**
 
 - [x] Adicionar opcionalmente à sessão ativa e verificar atualização única dos contadores.
-- [x] Recuperar análise por URL após recarga; o resultado persistido restaura ticket, versão, decisão e vizinhos.
+- [x] Recuperar análise por URL após recarga; o resultado persistido restaura texto, ticket, versão, decisão e vizinhos.
 - [ ] Validar `model_version` e rejeitar explicitamente contexto antigo ou incompatível antes de exibir o resultado.
 
 **P1 — aprofundamento da observabilidade**

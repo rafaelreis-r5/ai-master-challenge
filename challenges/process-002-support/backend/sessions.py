@@ -225,13 +225,18 @@ class Store:
         unique = {r.get('source_ticket_id') for r in members}
         if len(unique) < 5:
             return
+        similarities = [float(neighbor['similarity'])
+                        for member in members
+                        for neighbor in member.get('similar_tickets', [])
+                        if neighbor.get('cluster_id') == cluster and neighbor.get('similarity') is not None]
         row = db.execute('SELECT id,data FROM alerts WHERE session_id=? AND cluster_id=?', (sid, cluster)).fetchone()
         aid = row['id'] if row else uid()
         data = {'alert_id': aid, 'type': 'possible_emerging_incident', 'title': 'Possível concentração semântica',
                 'source': 'simulation', 'session_id': sid, 'cluster_id': cluster, 'space_id': ticket.get('space_id'),
                 'dataset_id': ticket['dataset_id'], 'ticket_ids': [r['ticket_id'] for r in members],
                 'source_ticket_ids': sorted(unique), 'count': len(members), 'unique_count': len(unique),
-                'window_seconds': 30, 'threshold': 5, 'simulation_time': current,
+                'window_steps': 30, 'threshold': 5, 'simulation_time': current,
+                'mean_similarity': round(sum(similarities) / len(similarities), 4) if similarities else None,
                 'rule_version': 'incident-demo-v1', 'label': 'CENÁRIO SIMULADO; regra experimental, sem validação estatística.',
                 'dominant_category': Counter(r.get('predicted_category') or 'Sem classificação' for r in members).most_common(1)[0][0]}
         if row:
@@ -282,10 +287,19 @@ class Store:
         confidence = [r['confidence'] for r in tickets if r.get('confidence') is not None]
         low_count = sum(r['confidence'] < r.get('review_threshold', .75) for r in tickets if r.get('confidence') is not None)
         n = len(tickets)
-        reviews = sum(bool(r.get('human_review_required')) for r in tickets)
+        triage_eligible = [r for r in tickets if r.get('processing_status') == 'complete'
+                           and r.get('decision_origin') == 'policy_suggested'
+                           and r.get('suggested_route')]
+        triage_eligible_count = len(triage_eligible)
+        reviews = sum(bool(r.get('human_review_required')) for r in triage_eligible)
+        auto_routed = triage_eligible_count - reviews
         simulated = [r for r in tickets if r['source'] == 'simulation']
-        metrics = {'processed': n, 'human_review_count': reviews, 'human_review_rate': reviews / n if n else None,
-                   'auto_routed_count': n - reviews, 'auto_route_rate': (n - reviews) / n if n else None,
+        metrics = {'processed': n, 'triage_eligible_count': triage_eligible_count,
+                   'triage_ineligible_count': n - triage_eligible_count,
+                   'human_review_count': reviews,
+                   'human_review_rate': reviews / triage_eligible_count if triage_eligible_count else None,
+                   'auto_routed_count': auto_routed,
+                   'auto_route_rate': auto_routed / triage_eligible_count if triage_eligible_count else None,
                    'low_confidence_count': low_count,
                    'low_confidence_rate': low_count / len(confidence) if confidence else None,
                    'average_confidence': sum(confidence) / len(confidence) if confidence else None,

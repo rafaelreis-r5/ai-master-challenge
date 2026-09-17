@@ -79,6 +79,11 @@ def main():
         snapshot = store.snapshot(sid)
         assert snapshot['state'] == 'COMPLETED' and snapshot['processed'] == 5
         assert snapshot['metrics']['median_ttr'] is None and snapshot['metrics']['csat'] is None
+        assert snapshot['metrics']['triage_eligible_count'] == 5
+        assert snapshot['metrics']['triage_ineligible_count'] == 0
+        assert snapshot['metrics']['human_review_count'] + snapshot['metrics']['auto_routed_count'] == 5
+        assert snapshot['metrics']['human_review_rate'] == snapshot['metrics']['human_review_count'] / 5
+        assert snapshot['metrics']['auto_route_rate'] == snapshot['metrics']['auto_routed_count'] / 5
         events, cursor = [], 0
         while True:
             page = store.events(sid, cursor, 7)
@@ -96,12 +101,25 @@ def main():
         assert all('text' not in n for e in events if e['event_type'] == 'NEIGHBORS_FOUND' for n in e['payload']['neighbors'])
         assert client.get(f'/api/sessions/{sid}/events?after_seq=999999').status_code == 422
         alert = snapshot['alerts'][0]
+        assert 'mean_similarity' in alert
         graph = client.get('/api/spaces/ds2-semantic-v1/graph', params={'session_id': sid, 'alert_id': alert['alert_id']}).json()
         assert set(alert['ticket_ids']) <= {n['id'] for n in graph['nodes']}
+        assert all('type' in edge and 'method' in edge for edge in graph['edges'])
         overview = client.get('/api/spaces/ds2-semantic-v1/graph', params={'session_id': sid}).json()
         assert overview['noise_count'] == 40640 and overview['session_ticket_count'] == 5
         assert any(n['is_noise'] and n['count'] == 40640 for n in overview['nodes'])
         assert sum(n['session_count'] for n in overview['nodes']) == 5
+
+        partial_sid = store.create({'kind': 'sandbox', 'dataset_id': 'ds2', 'ticket_ids': [],
+                                    'space_id': 'ds2-semantic-v1', 'policy_version': 'policy-v1'})
+        store.save_ticket({'text': 'partial', 'dataset_id': 'ds2', 'processing_status': 'partial',
+                           'errors': ['semantic unavailable'], 'decision_origin': 'policy_suggested',
+                           'suggested_route': 'Triagem geral', 'human_review_required': True},
+                          partial_sid, 'user_created')
+        partial_metrics = store.snapshot(partial_sid)['metrics']
+        assert partial_metrics['processed'] == 1 and partial_metrics['triage_eligible_count'] == 0
+        assert partial_metrics['triage_ineligible_count'] == 1
+        assert partial_metrics['human_review_rate'] is None and partial_metrics['auto_route_rate'] is None
 
         manual_payload = {'text': 'Não consigo acessar minha conta depois de trocar a senha.',
                           'dataset_id': 'ds2', 'request_id': str(uuid.uuid4())}
@@ -109,6 +127,7 @@ def main():
         repeated = post('/api/tickets/analyze', manual_payload)
         assert manual['ticket_id'] == repeated['ticket_id']
         assert manual['inference_mode'] == 'online' and manual['human_review_required']
+        assert manual['suggested_action']
         assert any('idioma' in reason for reason in manual['review_reasons'])
         assert manual['similar_tickets'] and manual['position_method'] == 'umap_transform'
         sandbox_created = store.events(manual['session_id'])['items'][0]

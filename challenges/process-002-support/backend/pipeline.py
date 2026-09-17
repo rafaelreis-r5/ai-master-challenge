@@ -507,6 +507,7 @@ class Pipeline:
                         pair = tuple(sorted((tid, other)))
                         if pair not in seen:
                             edges.append({'id': '|'.join(pair), 'source': pair[0], 'target': pair[1], 'weight': float(score)})
+                            edges[-1].update(type='knn', method='faiss_inner_product')
                             seen.add(pair)
         for row in relevant:
             coords = row.get('coordinates')
@@ -524,7 +525,8 @@ class Pipeline:
             for n in row.get('similar_tickets', []):
                 if n['ticket_id'] in visible:
                     edges.append({'id': row['ticket_id'] + '|' + n['ticket_id'], 'source': row['ticket_id'],
-                                  'target': n['ticket_id'], 'weight': n['similarity']})
+                                  'target': n['ticket_id'], 'weight': n['similarity'],
+                                  'type': 'session_knn', 'method': 'stored_similarity'})
         return {'space_id': space_id, 'dataset_id': space['dataset_id'], 'level': 'tickets', 'nodes': nodes,
                 'edges': edges[:1500], 'clusters': summaries[:100], 'total': total + len(relevant),
                 'displayed': len(nodes), 'truncated': total > len(indices),

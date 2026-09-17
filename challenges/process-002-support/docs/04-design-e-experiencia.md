@@ -128,7 +128,7 @@ Progressão: visão de clusters → subgrupo quando existir no artefato → tick
 
 O modo “Tabela / Lista” deve permitir as mesmas investigações essenciais sem canvas: cluster, tamanho, categoria dominante, métricas disponíveis, revisão necessária e ação para abrir tickets. No detalhe de ticket: vizinho, similaridade, rótulo observado, predição e origem. Busca, filtros, seleção e links funcionam por teclado nessa alternativa.
 
-Movimento de entrada usa coordenadas/vizinhos calculados; não altera relações para ficar visualmente atraente. O Graph usa Sigma/Graphology para os dados e uma camada SVG discreta de traços animados nas arestas reais; o pulso é somente uma affordance visual de atividade, nunca uma narrativa de aprendizado. Em `prefers-reduced-motion: reduce`, inserir diretamente na posição final, desativar o pulso e atualizar rótulos. Pausar animação não pausa o processamento, salvo controle de replay separado.
+Movimento de entrada usa coordenadas/vizinhos calculados; não altera relações para ficar visualmente atraente. O Graph usa Sigma/Graphology para os dados e camadas SVG discretas de traços animados nas arestas reais e halos nos nós pequenos. Cada nó se move individualmente de forma sutil. Ao clicar, o nó e seus vizinhos ficam acesos e o restante é suavizado; um novo clique no mesmo nó ou no fundo restaura tudo. O arraste reposiciona apenas o nó escolhido e preserva sua posição local durante o polling. O pulso é somente uma affordance visual de atividade, nunca uma narrativa de aprendizado. A entrada e a saída do workspace usam CSS e View Transitions quando disponíveis. Em `prefers-reduced-motion: reduce`, inserir diretamente na posição final, desativar o pulso e atualizar rótulos. Pausar animação não pausa o processamento, salvo controle de replay separado.
 
 Alertas dependem de regras documentadas e mostram grupo, quantidade, janela simulada, critério e registros. “Possível incidente” não vira incidente confirmado por receber brilho. Nenhuma informação existe exclusivamente em cor, tamanho, movimento, tooltip ou posição.
 
@@ -196,4 +196,4 @@ Registrar no process log decisões, limitações dos dados, erros encontrados, c
 - [ ] DES-10: layout utilizável a 320 CSS px e zoom 200%, com foco sempre visível.
 - [ ] DES-11: roteiro completo de 12 passos é repetível e seu fallback funciona sem LLM.
 - [ ] DES-12: process log registra execução real; números de exemplo do briefing não aparecem como medidos.
-- [x] DES-13: O Início explica corpus, estados, limites e roteiro; o Graph tem pulso neon baseado nas arestas reais e mantém tabela equivalente.
+- [x] DES-13: O Início explica corpus, estados, limites, raciocínio técnico e execução local; o Graph tem pulso/nós neon baseado nos dados reais, seleção tipo Obsidian, arraste individual e tabela equivalente.

@@ -11,9 +11,10 @@
 - [x] Navegador: Ticket Lab executou inferência online e abriu o mesmo ticket no Graph, com oito conexões e tabela alternativa.
 - [x] Navegador: build com `VITE_API_BASE_URL=http://127.0.0.1:8001` carregou Diagnosis por API externa CORS-autorizada.
 - [x] Navegador: após reinício do backend, Diagnosis DS1 e Command Center DS2 carregaram métricas reais, indisponibilidade temporal e limiar de revisão de 75%.
-- [x] Navegador: O Início carregou o roteiro para leigos; Graph overview exibiu relações agregadas e o indicador textual do pulso neon sobre arestas reais.
+- [x] Navegador: O Início carregou o roteiro para leigos, a narrativa técnica em primeira pessoa e o comando local; Graph overview exibiu relações agregadas e o indicador textual do pulso neon sobre arestas reais.
+- [x] Navegador: Graph exibiu 28 halos neon; selecionar um grupo deixou 27 nós/arestas inativos e o segundo clique restaurou a rede e o painel inicial, sem erros de console.
 - [x] Navegador/API: Diagnosis filtrou presença e nota CSAT sem alterar a origem histórica; os denominadores e a lista de evidências acompanharam o recorte.
-- [x] Navegador: Ticket Lab persistiu a identidade na URL e restaurou o resultado completo após recarga.
+- [x] Navegador: Ticket Lab persistiu a identidade na URL e restaurou o texto, a identidade e o resultado completo após recarga.
 
 ## Estado por lente
 
@@ -23,7 +24,7 @@
 | AI Automation Strategy | limites humanos, benchmark, fluxo e ROI parametrizado | carteira ainda não calcula elegibilidade/IDs por oportunidade |
 | AI Ticket Lab | validação, classificação, embeddings, vizinhos, política, idempotência, persistência por URL e Lab→Graph | validação de versão/contexto, tempos separados por etapa e avaliação PT-BR/DS1 |
 | AI Copilot | recuperação DS1, fallback extrativo, isolamento DS2 e feedback | histórico de feedback/sugestão recuperável na UI após reload |
-| Support Intelligence Graph | espaços versionados, Sigma/Graphology, tabela, deep links, relações agregadas e alerta→membros | filtros funcionais, avaliação humana dos agrupamentos e teste formal de fallback WebGL/reduced motion |
+| Support Intelligence Graph | espaços versionados, Sigma/Graphology, tabela, deep links, relações agregadas, alerta→membros, seleção tipo Obsidian, arraste individual e camadas neon | filtros funcionais, avaliação humana dos agrupamentos e teste formal de fallback WebGL/reduced motion |
 | Support Command Center | sessões, eventos, replay, alerta, métricas, links contextuais e proveniência de eventos | trilha visual completa, reconexão em duas abas e fila IA enquanto há processamento |
 
 ## Limites que não serão mascarados
